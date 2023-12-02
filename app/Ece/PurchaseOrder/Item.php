@@ -6,7 +6,7 @@ class Item {
     public function __construct(
         private string $partNumber,
         private string $description,
-        private string $webLink = '',
+        private string $webLink,
         private float $unitPrice,
         private string $unit,
         private float $quantity
