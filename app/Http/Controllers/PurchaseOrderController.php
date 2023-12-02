@@ -40,8 +40,10 @@ class PurchaseOrderController extends Controller {
                 $order->addOrderItem($item['part-number'], $item['description'], $item['web-link'], $item['unit-price'],
                     $item['unit'], $item['quantity']);
             }
-            $attachmentPath = $validInput['pdf-file']->store('pdf');
-            $order->setAttachmentPath($attachmentPath);
+            if($request->hasFile('pdf-file')){
+                $attachmentPath = $validInput['pdf-file']->store('pdf');
+                $order->setAttachmentPath(storage_path('app/' . $attachmentPath));
+            }
 
             $this->service->sendEmail($order);
 
