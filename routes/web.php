@@ -15,3 +15,4 @@ use App\Http\Controllers\PurchaseOrderController;
 */
 
 Route::get('/', [PurchaseOrderController::class, 'index']);
+Route::post('/', [PurchaseOrderController::class, 'store']);

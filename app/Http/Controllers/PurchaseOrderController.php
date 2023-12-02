@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\PurchaseOrderRequest;
+use App\Ece\PurchaseOrder\Approver;
 
 class PurchaseOrderController extends Controller
 {
     public function index(){
-        $faculty = Storage::json('faculty.json');
+        $faculty = Approver::retrieveAllApprovers();
         return view('purchase_order.index', ['faculty' => $faculty]);
+    }
+
+    public function store(PurchaseOrderRequest $request){
+        $validInput = $request->validated();
+        dd($validInput);
     }
 }
