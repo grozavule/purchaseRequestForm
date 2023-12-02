@@ -10,10 +10,11 @@ use Illuminate\Http\Request;
 
 class PurchaseOrderService implements PurchaseOrderServiceInterface {
     public function sendEmail(PurchaseOrder $order): void {
-        Mail::to(env('MAIL_TO_ADDRESS'))
-            ->cc($order->getSubmitter()->getEmailAddress())
-            ->send(new PurchaseOrderRequested($order));
-        if(Mail::failures()){
+        try {
+            Mail::to(env('MAIL_TO_ADDRESS'))
+                ->cc($order->getSubmitter()->getEmailAddress())
+                ->send(new PurchaseOrderRequested($order));
+        } catch(\Exception $e){
             throw new MailDeliveryFailureException();
         }
     }

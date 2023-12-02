@@ -47,8 +47,12 @@ class PurchaseOrderRequested extends Mailable
      */
     public function attachments(): array
     {
-        return [
-            Attachment::fromPath($this->order->getAttachmentPath())
-        ];
+        if(strlen($this->order->getAttachmentPath()) > 0) {
+            return [
+                Attachment::fromPath($this->order->getAttachmentPath())
+            ];
+        } else {
+            return [];
+        }
     }
 }

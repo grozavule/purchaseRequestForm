@@ -13,7 +13,7 @@ class PurchaseOrder {
     private string $projectName;
     private Vendor $vendor;
     private array $orderItems;
-    private string $attachmentPath;
+    private string $attachmentPath = '';
     public function __construct(){}
 
     public function addOrderItem(string $partNumber, string $description, string $webLink, float $unitPrice,
@@ -83,7 +83,11 @@ class PurchaseOrder {
     }
 
     public function getAttachmentPath(): string {
-        return $this->attachmentPath;
+        if(strlen($this->attachmentPath) > 0){
+            return $this->attachmentPath;
+        } else {
+            return '';
+        }
     }
 
     public function setAttachmentPath(string $attachmentPath): void {
